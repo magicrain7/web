@@ -13,6 +13,8 @@
 	<li><a href ="dept/deptSelectAll">부서등록폼</a>
 	<li><a href ="member/memberInsert.do">회원가입</a>
 	<li><a href ="member/memberSelectAll.do">회원전체조회</a>
+	<li><a href =""></a>
+	<li><a href =""></a>
 </ul>
 </form>
 </body>
