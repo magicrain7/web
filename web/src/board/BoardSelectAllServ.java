@@ -14,7 +14,7 @@ import member.MemberVO;
 /**
  * Servlet implementation class BoardSelectAllServ
  */
-@WebServlet("/board/boardSelect.do")
+@WebServlet("/board/boardSelectAll.do")
 public class BoardSelectAllServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,7 +36,7 @@ public class BoardSelectAllServ extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("boardAll.jsp")
+		request.getRequestDispatcher("boardSelectAll.jsp")
 				.forward(request, response);
 		
 	}
