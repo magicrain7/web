@@ -3,28 +3,27 @@ package member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import common.ConnectionManager;
 
 public class MemberDAO {
 
-
+  
 	//전역변수, 모든 메서드에서 공통으로 사용되는 변수
 	Connection conn;
 	PreparedStatement pstmt;
 	
 	//전체조회
-	public ArrayList<MemberVO> selectAll() {
+	public ArrayList<MemberVO> selectAll(MemberVO memberVO) {
 		MemberVO resultVO = null;
 		ResultSet rs = null; // 초기화
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = " SELECT id, pw, job, gender, mailyn, mailyn "
-					   + " FROM MEMBER"
-					   + " ORDER BY id";
+			String sql = " SELECT * FROM MEMBER ORDER BY ID";
 			pstmt = conn.prepareStatement(sql);
 			//pstmt.setInt(1,MemberVO.getDepartment_id()); sql문에 물음표 없어서 set도 필요없음.
 			rs = pstmt.executeQuery(); 
@@ -36,6 +35,7 @@ public class MemberDAO {
 				resultVO.setGender(rs.getString(4));
 				resultVO.setMailyn(rs.getString(5));
 				resultVO.setReason(rs.getString(6));
+				resultVO.setHobby(rs.getString(7));
 				list.add(resultVO);
 			}
 		} catch(Exception e) {
@@ -52,7 +52,7 @@ public class MemberDAO {
 		ResultSet rs = null; // 초기화
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = " SELECT id, pw, job, gender, mailyn, mailyn "
+			String sql = " SELECT ID, PW, JOB, GENDER, MAILYN, MAILYN "
 					   + " FROM MEMBER"
 					   + " WHERE ID= ?";
 			pstmt = conn.prepareStatement(sql);
@@ -66,6 +66,7 @@ public class MemberDAO {
 				resultVO.setGender(rs.getString(4));
 				resultVO.setMailyn(rs.getString(5));
 				resultVO.setReason(rs.getString(6));
+				resultVO.setHobby(rs.getString(7));
 
 			}else {
 				System.out.println("no data");
@@ -83,7 +84,7 @@ public class MemberDAO {
 	public void delete(MemberVO memberVO) {
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "delete from member where id = ?";
+			String sql = "DELETE FROM MEMBER WHERE ID = ?";
 			pstmt = conn.prepareStatement(sql);
 			//pstmt.setString(1, MemberVO.getDepartment_name());
 			pstmt.setString(1, memberVO.getId());
@@ -101,7 +102,7 @@ public class MemberDAO {
 	public void update(MemberVO memberVO) {
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "update board set pw = ? where id = ?";
+			String sql = "UPDATE BOARD SET PW = ? WHERE ID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberVO.getPw());
 			pstmt.setString(2, memberVO.getId());
@@ -122,15 +123,17 @@ public class MemberDAO {
 			//1.DB연결
 			conn = ConnectionManager.getConnnect();
 			//2.SQL 구문 실행
-			String sql = "insert into member values = ?, ?, ?, ?, ?, ?, ? ";
-			Statement stmt = conn.createStatement(); //예외처리
+			String sql = "INSERT INTO MEMBER(id , pw, "+" job, gender, mailyn, reason ,hobby, regdate)" 
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, sysdate )";
+			PreparedStatement pstmt = conn.prepareStatement(sql); //예외처리
 			pstmt.setString(1, memberVO.getId());
 			pstmt.setString(2, memberVO.getPw());
 			pstmt.setString(3, memberVO.getJob());
 			pstmt.setString(4, memberVO.getGender());
 			pstmt.setString(5, memberVO.getMailyn());
 			pstmt.setString(6, memberVO.getReason());
-			int r = stmt.executeUpdate(sql);
+			pstmt.setString(7, memberVO.getHobby());
+			int r = pstmt.executeUpdate();
 			//3.결과 처리
 			System.out.println(r + " 건이 처리됨");
 			
@@ -142,4 +145,51 @@ public class MemberDAO {
 			
 		}
 	}
+	
+	//select count(id) from member where mailyn ='y'
+	public int getMailynCnt() {
+		int cnt = 0;
+		try {
+			conn = ConnectionManager.getConnnect();
+			String sql = "select count(id) from member where mailyn ='y'";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			ConnectionManager.close(conn);
+		}
+		return cnt;
+		
+	}
+	
+	//성별 인원수 :select gender, count(id) cnt from member group by gender
+	public List<HashMap<String, Object>> getGenderCnt(){
+		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		
+		try {
+			conn = ConnectionManager.getConnnect();
+			String sql = "select count(id) from member where mailyn ='y'";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery(sql);
+			while(rs.next()) {
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("gender",rs.getString("gender"));
+				map.put("cnt",rs.getString("cnt"));
+				list.add(map);
+			}
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			ConnectionManager.close(conn);
+		}
+		return list;
+	}
+	 
+	
 }

@@ -22,7 +22,7 @@ public class BoardDAO {
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = " SELECT NO, poster, subject, contents, lastpost, views, filename "
+			String sql = " SELECT NO, POSTER, SUBJECT, CONTENTS, LASTPOST, VIEWS, FILENAME "
 					   + " FROM DEPARTMENTS"
 					   + " ORDER BY NO";
 			pstmt = conn.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class BoardDAO {
 		ResultSet rs = null; // 초기화
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = " SELECT NO, poster, subject, contents, lastpost, views, filename "
+			String sql = " SELECT NO, POSTER, SUBJECT, CONTENTS, LASTPOST, VIEWS, FILENAME "
 					   + " FROM DEPARTMENTS"
 					   + " WHERE NO= ?";
 			pstmt = conn.prepareStatement(sql);
@@ -124,7 +124,7 @@ public class BoardDAO {
 			//1.DB연결
 			conn = ConnectionManager.getConnnect();
 			//2.SQL 구문 실행
-			String sql = "insert into board values = ?, ?, ?, ?, ?, ?, ? ";
+			String sql = "insert into board values (?, ?, ?, ?, ?, ?, ? )";
 			Statement stmt = conn.createStatement(); //예외처리
 			pstmt.setString(1, boardVO.getNo());
 			pstmt.setString(2, boardVO.getPoster());

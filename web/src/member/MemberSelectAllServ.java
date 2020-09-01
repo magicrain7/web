@@ -1,4 +1,4 @@
-package dept;
+package member;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,22 +10,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class DeptSelectAllServ
+ * Servlet implementation class MemberSelectAllServ
  */
-@WebServlet("/dept/deptSelectAll")
-public class DeptSelectAllServ extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+//회원전체 조회
+@WebServlet("/member/memberSelectAll.do")
+public class MemberSelectAllServ extends HttpServlet {
+	private static final long serialVersionUID = 1L; 
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("dept전체조회실행");
-		//전체 조회
-		DeptDAO dao = new DeptDAO();
-		ArrayList<DeptVO> list = dao.selectAll(null);
+		System.out.println("member 전체조회");
+		
+		//전체조회
+		MemberDAO dao = new MemberDAO();
+		ArrayList<MemberVO> list = dao.selectAll(null);
+		
+		//결과 저장
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("deptSelectAll.jsp") 
+		
+		//view 페이지로 이동
+		request.getRequestDispatcher("memberAll.jsp")
 			   .forward(request, response);
 	}
+
 }
+

@@ -7,16 +7,18 @@ public class MemberVO {
 	public String gender;
 	public String mailyn;
 	public String reason;
+	public String hobby;
+	public String regdate;
 	
 	
 	
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", pw=" + pw + ", job=" + job + ", gender=" + gender + ", mailyn=" + mailyn
-				+ ", reason=" + reason + "]";
+				+ ", reason=" + reason + ", hobby=" + hobby + ", regdate=" + regdate + "]";
 	}
 	
-	public MemberVO(String id, String pw, String job, String gender, String mailyn, String reason) {
+	public MemberVO(String id, String pw, String job, String gender, String mailyn, String reason, String hobby) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -24,12 +26,31 @@ public class MemberVO {
 		this.gender = gender;
 		this.mailyn = mailyn;
 		this.reason = reason;
+		this.hobby = hobby;
 	}
 	
 	public MemberVO() {
 		super();
 	}
 	
+	
+	
+	public String getHobby() {
+		return hobby;
+	}
+
+	public void setHobby(String hobby) {
+		this.hobby = hobby;
+	}
+
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+
 	public String getId() {
 		return id;
 	}

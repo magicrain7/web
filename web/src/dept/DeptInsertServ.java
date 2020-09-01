@@ -19,14 +19,19 @@ public class DeptInsertServ extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DeptDAO dao = new DeptDAO();
 		
+		System.out.println("deptinsert실행");
+		//1. 파라미터를 VO에 담기
 		DeptVO deptVO = new DeptVO();
 		deptVO.setDepartment_id( Integer.parseInt(request.getParameter("department_id") ));
 		deptVO.setDepartment_name( request.getParameter("department_name") );
+		
+		//2. 등록처리
+		DeptDAO dao = new DeptDAO();
 		dao.insert(deptVO);
 		
-		//전체 조회 서블릿페이지로 이동
+		//3.결과처리
+		//4.전체 조회 서블릿페이지로 이동
 		response.sendRedirect("deptSelectAll");  //response
 	}
 

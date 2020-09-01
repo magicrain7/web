@@ -14,8 +14,7 @@
 	ArrayList<DeptVO> list = (ArrayList<DeptVO>)request.getAttribute("list");
 	for ( DeptVO dept : list ) {
 %>
-	<tr><td><%=dept.getDepartment_id() %></td>
-		<td><%=dept.getDepartment_name() %></td></tr>
+	<tr><td><a href="deptSelect?department_id=<%=dept.getDepartment_id()%>"><%=dept.getDepartment_id() %></a></td> 
 <% } %>
 </table>
 </body>

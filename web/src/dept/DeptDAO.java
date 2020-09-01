@@ -21,8 +21,8 @@ public class DeptDAO {
 		ArrayList<DeptVO> list = new ArrayList<DeptVO>();
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = " SELECT DEPARTMENT_ID, DEPARTMENT_NAME,MANAGER_ID mgr_id, LOCATION_ID"
-					   + " FROM DEPARTMENTS"
+			String sql = " SELECT DEPARTMENT_ID, DEPARTMENT_NAME,MANAGER_ID MGR_ID, LOCATION_ID"
+					   + " FROM HR.DEPARTMENTS"
 					   + " ORDER BY DEPARTMENT_ID";
 			pstmt = conn.prepareStatement(sql);
 			//pstmt.setInt(1,deptVO.getDepartment_id()); sql문에 물음표 없어서 set도 필요없음.
@@ -50,7 +50,7 @@ public class DeptDAO {
 		try {
 			conn = ConnectionManager.getConnnect();
 			String sql = " SELECT DEPARTMENT_ID, DEPARTMENT_NAME,MANAGER_ID mgr_id, LOCATION_ID"
-					   + " FROM DEPARTMENTS"
+					   + " FROM HR.DEPARTMENTS"
 					   + " WHERE DEPARTMENT_ID= ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,deptVO.getDepartment_id());
@@ -77,7 +77,7 @@ public class DeptDAO {
 	public void delete(DeptVO deptVO) {
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "delete departments where department_id = ?";
+			String sql = "DELETE HR.DEPARTMENTS WHERE DEPARTMENT_ID = ?";
 			pstmt = conn.prepareStatement(sql);
 			//pstmt.setString(1, deptVO.getDepartment_name());
 			pstmt.setInt(1, deptVO.getDepartment_id());
@@ -94,7 +94,7 @@ public class DeptDAO {
 	public void update(DeptVO deptVO) {
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "update departments set department_name = ? where department_id = ?";
+			String sql = "UPDATE HR.DEPARTMENTS SET DEPARTMENT_NAME = ? WHERE DEPARTMENT_ID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, deptVO.getDepartment_name());
 			pstmt.setInt(2, deptVO.getDepartment_id());
@@ -114,8 +114,8 @@ public class DeptDAO {
 			//1.DB연결
 			conn = ConnectionManager.getConnnect();
 			//2.SQL 구문 실행
-			String sql = "insert into departments (department_id, department_name)"
-						+ "values ("+ deptVO.getDepartment_id() + " ,' " 
+			String sql = "INSERT INTO HR.DEPARTMENTS (DEPARTMENT_ID, DEPARTMENT_NAME)"
+						+ "VALUES ("+ deptVO.getDepartment_id() + " ,' " 
 									+ deptVO.getDepartment_name() + "')";
 			Statement stmt = conn.createStatement(); //예외처리
 			int r = stmt.executeUpdate(sql);
