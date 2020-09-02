@@ -109,10 +109,16 @@ public class MemberDAO {
 	public void update(MemberVO memberVO) {
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = "UPDATE BOARD SET PW = ? WHERE ID = ?";
+			String sql = "UPDATE MEMBER SET PW = ?, JOb = ?, gender = ?, mailyn = ?, "
+						+ "reason = ?, hobby = ? WHERE ID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberVO.getPw());
-			pstmt.setString(2, memberVO.getId());
+			pstmt.setString(2, memberVO.getJob());
+			pstmt.setString(3, memberVO.getGender());
+			pstmt.setString(4, memberVO.getMailyn());
+			pstmt.setString(5, memberVO.getReason());
+			pstmt.setString(6, memberVO.getHobby());
+			pstmt.setString(7, memberVO.getId());
 			pstmt.executeUpdate(); //업데이트할때 괄호안에 안들어감
 			int r = pstmt.executeUpdate();
 			System.out.println(r + " 건이 수정됨");
@@ -130,9 +136,9 @@ public class MemberDAO {
 			//1.DB연결
 			conn = ConnectionManager.getConnnect();
 			//2.SQL 구문 실행
-			String sql = "INSERT INTO MEMBER(id , pw, "+" job, gender, mailyn, reason ,hobby, regdate)" 
+			String sql = "INSERT INTO MEMBER(id , pw, job, gender, mailyn, reason ,hobby, regdate)" 
 						+ "VALUES (?, ?, ?, ?, ?, ?, ?, sysdate )";
-			PreparedStatement pstmt = conn.prepareStatement(sql); //예외처리
+		    pstmt = conn.prepareStatement(sql); //예외처리
 			pstmt.setString(1, memberVO.getId());
 			pstmt.setString(2, memberVO.getPw());
 			pstmt.setString(3, memberVO.getJob());
@@ -175,13 +181,14 @@ public class MemberDAO {
 	
 	//성별 인원수 :select gender, count(id) cnt from member group by gender
 	public List<HashMap<String, Object>> getGenderCnt(){
+		ResultSet rs = null;
 		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		
 		try {
 			conn = ConnectionManager.getConnnect();
 			String sql = "select count(id) from member where mailyn ='y'";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery(sql);
+			rs = pstmt.executeQuery(sql);
 			while(rs.next()) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("gender",rs.getString("gender"));

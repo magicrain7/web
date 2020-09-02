@@ -17,13 +17,13 @@
 <div><span class="label">가입동기</span><span>취업</span></div>
 <button type="button" id="btnPage">목록으로</button>
 <script>
-	btnPage.addEventListener("click",goPage);
-	function goPage() {
+	btnPage.addEventListener("click",function(){
+
 		//https://goddaehee.tistory.com/121 브라우저 버전체크
 		//history.back();
+		//history.go(-1); //이전페이지로 이동.
 		//location.href="memberAll.jsp"
-		//location.assign("memberAll.jsp")
-		history.go(-1); //이전페이지로 이동.
+		location.assign("memberAll.jsp")
 	}
 </script>
 </body>

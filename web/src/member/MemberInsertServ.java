@@ -1,6 +1,7 @@
 package member;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Map;
@@ -48,7 +49,9 @@ public class MemberInsertServ extends HttpServlet {
 				
 				try {
 					BeanUtils.copyProperties(memberVO, request.getParameterMap());
-				} catch(Exception e) {
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
 					e.printStackTrace();
 				}
 				System.out.println("===========map==========");
