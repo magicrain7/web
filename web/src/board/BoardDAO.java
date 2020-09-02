@@ -3,6 +3,7 @@ package board;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -123,10 +124,26 @@ public class BoardDAO {
 		try {
 			//1.DB연결
 			conn = ConnectionManager.getConnnect();
-			//2.SQL 구문 실행
+			conn.setAutoCommit(false);
+			// 보드 번호조회, 업데이트
+			String seqSql="select no from seq where tablename = 'board'";
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(seqSql);
+			rs.next();
+			int no = rs.getInt(1);
+			seqSql="update seq set no = no + 1 where tablename = 'board' ";
+			stmt = conn.createStatement();
+			
+			// 보드번호 업데이트
+			stmt.executeUpdate(seqSql);
+			
+			//pstmt=conn.prepareStatement(sql);  ??
+			
+			// 게시글 등록
 			String sql = "insert into board values (?, ?, ?, ?, ?, ?, ? )";
-			Statement stmt = conn.createStatement(); //예외처리
-			pstmt.setString(1, boardVO.getNo());
+			//() "+" values()";
+			PreparedStatement psmtm = conn.prepareStatement(sql); //예외처리
+			pstmt.setInt(1, no);
 			pstmt.setString(2, boardVO.getPoster());
 			pstmt.setString(3, boardVO.getSubject());
 			pstmt.setString(4, boardVO.getContents());
@@ -134,11 +151,17 @@ public class BoardDAO {
 			pstmt.setString(6, boardVO.getViews());
 			pstmt.setString(7, boardVO.getFilename());
 			int r = stmt.executeUpdate(sql);
+			
+			conn.commit();
 			//3.결과 처리
-			System.out.println(r + " 건이 처리됨");
+			//System.out.println(r + " 건이 처리됨");
 			
 		} catch(Exception e) {
-			e.printStackTrace();
+			try {
+			conn.rollback();
+			} catch(SQLException e1) {
+			  e.printStackTrace();
+			}
 		} finally {
 			//4. 연결해제(DB에 접속 session수는 제한적 그래서 해제해야됨)
 			ConnectionManager.close(conn);

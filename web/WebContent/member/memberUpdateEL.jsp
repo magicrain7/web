@@ -1,10 +1,12 @@
+<%@page import="member.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>member Insert </title>
+<title>memberUpdateEL  </title>
 <script>
 function inputCheck(){
 	//id,pw 필수입력 체크
@@ -41,26 +43,29 @@ function inputCheck(){
 </head>
 <body>
 <%@include file="/common/header.jsp" %>
+
 <h3 class ="page_title">회원등록</h3>
 <form method="post" name="frm" 
-	  id="frm" action="memberInsert.do"
+	  id="frm" action="memberUpdate"
 	  onsubmit="return inputCheck()">
 	<div>
 	<label for="id">id</label>
-		<input type="text" id="id" name="id">
+		<input id="id" name="id" value="${login.id }" readonly="readonly">
 	</div>
 	
 	<div>	
 	<label for="pw">password</label>
-		<input type="password" id="pw" name="pw">
+		<input type="password" id="pw" name="pw" value="${login.pw }">
 	</div>
 	
 	<div>
 	<label>성별</label>
-		<input type="radio" id="male" name="gender" value="male">
-		<label for="male" class="label2">남</label>
-		<input type="radio" id="female" name="gender" value="female">
-		<label for="female" class="label2">여</label>
+		<input type="radio" id="male" name="gender" value="male"
+			<c:if test="${login.gender=='male' }">checked="checked"</c:if>>남
+		<label for="male" class="label2"></label>
+		<input type="radio" id="female" name="gender" value="female" 
+			<c:if test="${login.gender=='female' }">checked="checked"</c:if>>여 
+		<label for="female" class="label2"></label>
 	</div>
 	
 	<div >
@@ -74,7 +79,7 @@ function inputCheck(){
 	
 	<div>
 	<label for="reason">가입</label>
-	<textarea id="reason" name="reason"></textarea>
+	<textarea id="reason" name="reason">${login.reason }</textarea>
 	</div>
 		
 	<div class="regist">
@@ -83,10 +88,16 @@ function inputCheck(){
 	</div>
 	
 	<div>
+	<%
+		String hobby = member.getHobby();
+		if( hobby == null){
+			hobby = "";
+		}
+	%>
 		<label for="hobby">취미</label>
 		<input type="checkbox" name="hobby" value="read">독서
 		<input type="checkbox" name="hobby" value="game">게임
-		<input type="checkbox" name="hobby"value="ski">스키
+		<input type="checkbox" name="hobby" value="ski">스키
 		
 	</div>
 	

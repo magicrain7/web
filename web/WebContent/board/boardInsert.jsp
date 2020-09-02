@@ -10,11 +10,11 @@
 <h3 class = "page_title">insert board</h3>
 <form id="frm" name="frm" method="post" 
 	  action="boardInsert.do" onsubmit="return inputCheck()">
-	   <div>
+<!-- 	   <div>
 	  	<label for="no">NO</label>
 	  	<input type="text" id="no" name="no">
 	  </div>
-	  
+	   -->
 	  <div>
 	  	<label for="poster">poster</label>
 	  	<input type="text" id="posrter" name="poster">

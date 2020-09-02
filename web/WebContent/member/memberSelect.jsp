@@ -7,6 +7,7 @@
 <title>Member select</title>
 </head>
 <body>
+<%@include file="/common/header.jsp" %>
 <h3>내정보조회</h3>
 <div><span class="label">아이디</span><span>chichi</span></div>
 <div><span class="label">패스워드</span><span>1234</span></div>

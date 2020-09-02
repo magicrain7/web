@@ -14,6 +14,7 @@
 </style>
 </head>
 <body>
+<%@include file="/common/header.jsp" %>
 <h3>회원 전체조회</h3>
 <ul class="search">
 	<li>메일수신여부</li>
@@ -40,7 +41,7 @@
 		for(MemberVO member : list) {
 	%>
 	<tr>
-	<td ><a href="memberselect.jsp"><%=member.getId() %></td>
+	<td ><a href="memberSelect.jsp"><%=member.getId() %></td>
 	<td><%=member.getPw() %></td>
 	<td><%=member.getJob() %></td>
 	<td><%=member.getGender() %></td>

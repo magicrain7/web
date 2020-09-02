@@ -15,6 +15,15 @@ public class MemberDAO {
 	//전역변수, 모든 메서드에서 공통으로 사용되는 변수
 	Connection conn;
 	PreparedStatement pstmt;
+	ResultSet rs = null; // 초기화
+	
+	//싱글톤
+	static MemberDAO instance;
+	public static MemberDAO getInstance() {
+		if(instance == null)
+			instance=new MemberDAO();
+			return instance;
+	}
 	
 	//전체조회
 	public ArrayList<MemberVO> selectAll(MemberVO memberVO) {
@@ -49,12 +58,10 @@ public class MemberDAO {
 	//단건 조회
 	public MemberVO selectOne(MemberVO memberVO) {
 		MemberVO resultVO = null;
-		ResultSet rs = null; // 초기화
+
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = " SELECT ID, PW, JOB, GENDER, MAILYN, MAILYN "
-					   + " FROM MEMBER"
-					   + " WHERE ID= ?";
+			String sql = " SELECT * FROM MEMBER WHERE ID= ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,memberVO.getId());
 			rs = pstmt.executeQuery(); 

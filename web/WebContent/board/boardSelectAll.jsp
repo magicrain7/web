@@ -29,7 +29,7 @@
 		for(BoardVO board : list) {
 	%>
 	<tr>
-	<td ><a href="boardSelect.jsp"><%=board.getNo() %></td>
+	<td ><a href="boardSelectAll.jsp=<%=board.getNo() %>"><%=board.getNo() %></td>
 	<td><%=board.getPoster() %></td>
 	<td><%=board.getSubject() %></td>
 	<td><%=board.getContents() %></td>

@@ -1,3 +1,4 @@
+<%@page import="member.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,40 +42,45 @@ function inputCheck(){
 </head>
 <body>
 <%@include file="/common/header.jsp" %>
+<% MemberVO member = (MemberVO) session.getAttribute("login") ; %>
 <h3 class ="page_title">회원등록</h3>
 <form method="post" name="frm" 
-	  id="frm" action="memberInsert.do"
+	  id="frm" action="memberUpdate"
 	  onsubmit="return inputCheck()">
 	<div>
 	<label for="id">id</label>
-		<input type="text" id="id" name="id">
+		<input id="id" name="id" value="<%=member.getId()%>" readonly="readonly">
 	</div>
 	
 	<div>	
 	<label for="pw">password</label>
-		<input type="password" id="pw" name="pw">
+		<input type="password" id="pw" name="pw" value="<%=member.getPw()%>">
 	</div>
 	
 	<div>
 	<label>성별</label>
 		<input type="radio" id="male" name="gender" value="male">
-		<label for="male" class="label2">남</label>
-		<input type="radio" id="female" name="gender" value="female">
-		<label for="female" class="label2">여</label>
+			   <%if("male".equals(member.getGender())) {out.print("checked='checkd'");} %>>남
+		<label for="male" class="label2"></label>
+		<input type="radio" id="female" name="gender" value="female" 
+				<%if("female".equals(member.getGender())) {out.print("checked='checkd'");} %>>여 
+		<label for="female" class="label2"></label>
 	</div>
 	
 	<div >
 	<label for="job">직업</label>
 	<select name="job" id="job" >
 		<option value="">선택</option>
-		<option value="program">프로그래머</option>
-		<option value="degin">디자이너</option>
+		<option value="program" 
+			    <%if("program".equals(member.getJob())) {out.print("selected='selected'");} %>>프로그래머</option>
+		<option value="degin"
+				<%if("degin".equals(member.getJob())) {out.print("selected='selected'");} %>>>디자이너</option>
 	</select>
 	</div>
 	
 	<div>
 	<label for="reason">가입</label>
-	<textarea id="reason" name="reason"></textarea>
+	<textarea id="reason" name="reason"><%=member.getReason()%></textarea>
 	</div>
 		
 	<div class="regist">
@@ -83,10 +89,20 @@ function inputCheck(){
 	</div>
 	
 	<div>
+	<%
+		String hobby = member.getHobby();
+		if( hobby == null){
+			hobby = "";
+		}
+	%>
+	
 		<label for="hobby">취미</label>
-		<input type="checkbox" name="hobby" value="read">독서
-		<input type="checkbox" name="hobby" value="game">게임
-		<input type="checkbox" name="hobby"value="ski">스키
+		<input type="checkbox" name="hobby" value="read"
+				<%if("read".contains(member.getHobby())) {out.print("checked='checked'");} %>>독서
+		<input type="checkbox" name="hobby" value="game"
+			   <%if("game".contains(member.getHobby())) {out.print("checked='checked'");} %>>게임
+		<input type="checkbox" name="hobby" value="ski"
+				<%if("ski".contains(member.getHobby())) {out.print("checked='checked'");} %>>스키
 		
 	</div>
 	

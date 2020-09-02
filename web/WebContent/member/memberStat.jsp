@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@include file="/common/header.jsp" %>
 <h3>회원통계</h3>
 <h3>남여비율</h3>
 <% List<HashMap<String, Object>> list = 
