@@ -18,7 +18,10 @@ public class MemberVO {
 				+ ", reason=" + reason + ", hobby=" + hobby + ", regdate=" + regdate + "]";
 	}
 	
-	public MemberVO(String id, String pw, String job, String gender, String mailyn, String reason, String hobby) {
+	
+	
+	public MemberVO(String id, String pw, String job, String gender, String mailyn, String reason, String hobby,
+			String regdate) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -27,8 +30,11 @@ public class MemberVO {
 		this.mailyn = mailyn;
 		this.reason = reason;
 		this.hobby = hobby;
+		this.regdate = regdate;
 	}
+
 	
+
 	public MemberVO() {
 		super();
 	}

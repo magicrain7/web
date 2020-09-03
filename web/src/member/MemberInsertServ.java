@@ -17,7 +17,7 @@ import org.apache.commons.beanutils.BeanUtils;
 /**
  * Servlet implementation class MemberInsertServ
  */
-@WebServlet("/member/memberInsert.do")
+@WebServlet("/member/memberInsert")
 public class MemberInsertServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
@@ -34,7 +34,7 @@ public class MemberInsertServ extends HttpServlet {
 
 	//등록처리
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				request.setCharacterEncoding("utf-8"); //post일땐 encoding 넣어야됨
+				request.setCharacterEncoding("UTF-8"); //post일땐 encoding 넣어야됨
 				//1. 파라미터를 VO에 담기
 				MemberVO memberVO = new MemberVO();
 				/*
