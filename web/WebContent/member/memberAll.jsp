@@ -44,13 +44,14 @@
 		<td>${member.getJob()}</td>
 		<td>${member.getGender() }</td>
 		
-		<td>${member.mailyn }
-			<button type="button">메일발송</button>
+		<td>${member.mailyn}<c:if test="${member.mailyn.equals('Y')}">
+			<button type="button">메일전송</button></c:if></td>
 		</td>	
 		<td>${member.reason }</td>
 		
 		<td>
-			<fmt:formatDate value="${member.getRegdate()}"pattern="yyyy-MM" />
+			<fmt:parseDate value="${member.regdate}" pattern="yyyy-MM-dd HH:mm:ss" var="parseToday"/>
+			<fmt:formatDate value="${parseToday}" pattern="MM-dd"/>
 		</td>
 				
 	</c:forEach>
