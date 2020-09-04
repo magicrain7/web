@@ -45,7 +45,7 @@
 		<td>${member.getGender() }</td>
 		
 		<td>${member.mailyn}<c:if test="${member.mailyn.equals('Y')}">
-			<button type="button">메일전송</button></c:if></td>
+			<button type="button">메일전송</button></c:if>
 		</td>	
 		<td>${member.reason }</td>
 		
@@ -53,7 +53,6 @@
 			<fmt:parseDate value="${member.regdate}" pattern="yyyy-MM-dd HH:mm:ss" var="parseToday"/>
 			<fmt:formatDate value="${parseToday}" pattern="MM-dd"/>
 		</td>
-				
 	</c:forEach>
 <%-- 		ArrayList<MemberVO> list = 
 			(ArrayList<MemberVO>)request.getAttribute("list");
@@ -67,7 +66,7 @@
 	<td><%=member.getGender() %></td>
 	<td><%=member.getMailyn() %></td>
 	<td><%=member.getReason() %></td> --%>
-	</tr>
+	<!-- </tr> -->
 	<%-- <% } %> --%>
 
 	

@@ -14,7 +14,7 @@ public class DeptVO {
 		super();
 		Department_id = department_id;
 	}
-
+	
 	public DeptVO(int department_id, String department_name) {
 		super();
 		Department_id = department_id;

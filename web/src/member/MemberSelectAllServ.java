@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class MemberSelectAllServ
  */
 //회원전체 조회
-@WebServlet("/member/memberSelectAll.do")
+@WebServlet("/member/memberSelectAll")
 public class MemberSelectAllServ extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
 

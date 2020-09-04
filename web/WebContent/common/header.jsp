@@ -9,8 +9,8 @@
 		<li>${sessionScope.id}님 <a href="<%=application.getContextPath() %>/member/logout">로그아웃</a>
 		<li><a href="<%=application.getContextPath() %>/member/memberUpdate">정보수정</a>
 	</c:if>
-		<li><a href ="<%=application.getContextPath() %>/dept/DeptInsertFormServ">부서등록폼</a> 
+		<li><a href ="<%=application.getContextPath() %>/dept/DeptInsert">부서등록품</a> 
 		<li><a href ="<%=application.getContextPath() %>/dept/deptSelectAll">부서전체조회</a>
 		<li><a href ="<%=application.getContextPath() %>/member/memberInsert">회원가입</a> <!--절대경로 -->
-		<li><a href ="<%=application.getContextPath() %>/member/memberSelectAll.do">회원전체조회</a>
+		<li><a href ="<%=application.getContextPath() %>/member/memberSelectAll">회원전체조회</a>
 </ul>

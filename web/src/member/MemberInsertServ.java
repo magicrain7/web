@@ -83,7 +83,7 @@ public class MemberInsertServ extends HttpServlet {
 				dao.insert(memberVO);
 				
 				//목록으로 이동
-				response.sendRedirect("memberSelectAll.do");
+				response.sendRedirect("memberSelectAll");
 	}
 
 }

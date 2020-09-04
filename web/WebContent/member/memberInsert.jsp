@@ -58,9 +58,9 @@ function inputCheck(){
 	<div>
 	<label>성별</label>
 		<input type="radio" id="male" name="gender" value="male">
-		<label for="male" class="label2">남</label>
+		<label for="male" class="label">남</label>
 		<input type="radio" id="female" name="gender" value="female">
-		<label for="female" class="label2">여</label>
+		<label for="female" class="label">여</label>
 	</div>
 	
 	<div >
