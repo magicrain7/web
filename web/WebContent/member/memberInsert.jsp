@@ -43,7 +43,7 @@ function inputCheck(){
 <%@include file="/common/header.jsp" %>
 <h3 class ="page_title">회원등록</h3>
 <form method="post" name="frm" 
-	  id="frm" action="memberInsert.do"
+	  id="frm" action="memberInsert"
 	  onsubmit="return inputCheck()">
 	<div>
 	<label for="id">id</label>
