@@ -24,7 +24,6 @@
 	<li><button type="button">검색</button>
 </ul>
 	
-
 <table id = "member" border="1">
 	<thead>
 	<tr>
@@ -39,6 +38,7 @@
 	</thead>
 	
 	<c:forEach items="${list}" var="member">
+	<tr>
 		<td><a href="memberSelect.jsp">${member.id}</a></td>
 		<td>${member.pw }</td>
 		<td>${member.getJob()}</td>
@@ -53,6 +53,7 @@
 			<fmt:parseDate value="${member.regdate}" pattern="yyyy-MM-dd HH:mm:ss" var="parseToday"/>
 			<fmt:formatDate value="${parseToday}" pattern="MM-dd"/>
 		</td>
+	 </tr>
 	</c:forEach>
 <%-- 		ArrayList<MemberVO> list = 
 			(ArrayList<MemberVO>)request.getAttribute("list");

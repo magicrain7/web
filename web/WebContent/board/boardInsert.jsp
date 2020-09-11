@@ -9,7 +9,8 @@
 <body>
 <h3 class = "page_title">insert board</h3>
 <form id="frm" name="frm" method="post" 
-	  action="boardInsert.do" onsubmit="return inputCheck()">
+	  enctype ="multipart/form-data"
+	  action="boardInsert.do" >
 <!-- 	   <div>
 	  	<label for="no">NO</label>
 	  	<input type="text" id="no" name="no">
@@ -17,8 +18,8 @@
 	   -->
 	  <div>
 	  	<label for="poster">poster</label>
-	  	<input type="text" id="posrter" name="poster">
 	  </div>
+	  	<input type="text" id="poster" name="poster">
 	  
 	  <div>
 	  	<label for="subject">subject</label>

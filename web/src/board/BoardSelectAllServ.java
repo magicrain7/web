@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.MemberVO;
-
 /**
  * Servlet implementation class BoardSelectAllServ
  */
@@ -33,12 +31,9 @@ public class BoardSelectAllServ extends HttpServlet {
 		System.out.println("boardSelect 조회");
 		BoardDAO dao = new BoardDAO();
 		ArrayList<BoardVO> list = dao.selectAll();
-		
 		request.setAttribute("list", list);
-		
 		request.getRequestDispatcher("boardSelectAll.jsp")
 				.forward(request, response);
-		
 	}
 
 	/**

@@ -13,4 +13,5 @@
 		<li><a href ="<%=application.getContextPath() %>/dept/deptSelectAll">부서전체조회</a>
 		<li><a href ="<%=application.getContextPath() %>/member/memberInsert">회원가입</a> <!--절대경로 -->
 		<li><a href ="<%=application.getContextPath() %>/member/memberSelectAll">회원전체조회</a>
+		<li><a href ="<%=application.getContextPath() %>/board/boardSelectAll.do">boardAll</a>
 </ul>

@@ -36,8 +36,7 @@ public class BoardDAO {
 				resultVO.setSubject(rs.getString(3));
 				resultVO.setContents(rs.getString(4));
 				resultVO.setLastpost(rs.getString(5));
-				resultVO.setViews(rs.getString(6));
-				resultVO.setFilename(rs.getString(7));
+				resultVO.setFilename(rs.getString(6));
 				list.add(resultVO);
 			}
 		} catch(Exception e) {

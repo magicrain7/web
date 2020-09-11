@@ -14,18 +14,32 @@ public class DeptDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 	
-	//전체조회
+	//전체조회 (페이징처리) + 검색조건
 	public ArrayList<DeptVO> selectAll(DeptVO deptVO) {
 		DeptVO resultVO = null;
 		ResultSet rs = null; // 초기화
 		ArrayList<DeptVO> list = new ArrayList<DeptVO>();
 		try {
 			conn = ConnectionManager.getConnnect();
-			String sql = " SELECT DEPARTMENT_ID, DEPARTMENT_NAME,MANAGER_ID MGR_ID, LOCATION_ID"
-					   + " FROM HR.DEPARTMENTS"
-					   + " ORDER BY DEPARTMENT_ID";
+			String where =" where 1=1";
+			if (deptVO.getDepartment_name() != null) {
+				where += " and department_name like '%' || ? || '%'";
+			}
+			
+			String sql =  " SELECT A.* FROM( SELECT ROWNUM RN,B.* FROM( " 
+						+ " SELECT DEPARTMENT_ID, DEPARTMENT_NAME,MANAGER_ID MGR_ID, LOCATION_ID"
+						+ " FROM HR.DEPARTMENTS"
+						+ where
+						+ " ORDER BY DEPARTMENT_ID"
+						+ " ) B ) A WHERE RN BETWEEN ? AND ? ";
 			pstmt = conn.prepareStatement(sql);
 			//pstmt.setInt(1,deptVO.getDepartment_id()); sql문에 물음표 없어서 set도 필요없음.
+			int pos = 1;
+			if (deptVO.getDepartment_name() != null) {
+				pstmt.setString(pos++, deptVO.getDepartment_name());
+			}
+			pstmt.setInt(pos++,deptVO.getFirst());
+			pstmt.setInt(pos++,deptVO.getLast());
 			rs = pstmt.executeQuery(); 
 			while(rs.next()) {	
 				resultVO = new DeptVO();
@@ -43,6 +57,31 @@ public class DeptDAO {
 		return list;
 		
 	}
+	//전체 건수 
+		public int count(DeptVO deptVO) {
+			int cnt = 0;
+			try {
+				String where =" where 1=1";
+				if (deptVO.getDepartment_name() != null) {
+					where += " and department_name like '%' || ? || '%'";
+				}
+				conn = ConnectionManager.getConnnect();
+				String sql = "select count(*) from hr.departments " + where;
+				pstmt = conn.prepareStatement(sql);
+				int pos =1;
+				if (deptVO.getDepartment_name() != null) {
+					pstmt.setString(pos++, deptVO.getDepartment_name());
+				}
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				cnt = rs.getInt(1);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				ConnectionManager.close(conn);
+			}
+			return cnt;
+		}
 	//단건 조회
 	public DeptVO selectOne(DeptVO deptVO) {
 		DeptVO resultVO = null;
