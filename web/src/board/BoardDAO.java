@@ -15,7 +15,15 @@ public class BoardDAO {
 	//전역변수, 모든 메서드에서 공통으로 사용되는 변수
 	Connection conn;
 	PreparedStatement pstmt;
+	ResultSet rs = null; // 초기화
 	
+	//싱글톤
+	static BoardDAO instance;
+	public static BoardDAO getInstance() {
+		if(instance == null)
+			instance=new BoardDAO();
+			return instance;
+	}
 	//전체조회
 	public ArrayList<BoardVO> selectAll() {
 		BoardVO resultVO = null;
@@ -130,16 +138,18 @@ public class BoardDAO {
 			ResultSet rs = stmt.executeQuery(seqSql);
 			rs.next();
 			int no = rs.getInt(1);
-			seqSql="update seq set no = no + 1 where tablename = 'board' ";
-			stmt = conn.createStatement();
+			boardVO.setNo(Integer.toString(no));
 			
 			// 보드번호 업데이트
-			stmt.executeUpdate(seqSql);
+			/*
+			 * seqSql="update seq set no = no + 1 where tablename = 'board' "; stmt =
+			 * conn.createStatement(); stmt.executeUpdate(seqSql);
+			 */
 			
 			//pstmt=conn.prepareStatement(sql);  ??
 			
 			// 게시글 등록
-			String sql = "insert into board values (?, ?, ?, ?, ?, ?, ? )";
+			String sql = "insert into board values ( ?, ?, ? , ? , ? , ? , ? )";
 			//() "+" values()";
 			PreparedStatement psmtm = conn.prepareStatement(sql); //예외처리
 			pstmt.setInt(1, no);

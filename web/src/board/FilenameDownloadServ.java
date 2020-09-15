@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 
-import board.model.BoardDAO;
-import board.model.BoardVO;
-
 /**
  * Servlet implementation class FileDownloadServlet
  */

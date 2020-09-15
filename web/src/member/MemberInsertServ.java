@@ -30,8 +30,7 @@ public class MemberInsertServ extends HttpServlet {
 		request.getRequestDispatcher("memberInsert.jsp").forward(request, response);
 		
 	}
-
-
+	
 	//등록처리
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				request.setCharacterEncoding("UTF-8"); //post일땐 encoding 넣어야됨
