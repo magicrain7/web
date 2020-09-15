@@ -16,6 +16,14 @@ public class BoardDAO {
 	Connection conn;
 	PreparedStatement pstmt;
 	
+	static BoardDAO instance;
+	public static BoardDAO getInstance() {
+		if(instance == null)
+			instance = new BoardDAO();
+			return instance;
+	}
+	
+	
 	//전체조회
 	public ArrayList<BoardVO> selectAll() {
 		BoardVO resultVO = null;

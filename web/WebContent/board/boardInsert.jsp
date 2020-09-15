@@ -9,7 +9,8 @@
 <body>
 <h3 class = "page_title">insert board</h3>
 <form id="frm" name="frm" method="post" 
-	  action="boardInsert.do" onsubmit="return inputCheck()">
+	  action="boardInsert.do" 
+	  enctype="multipart/form-data" onsubmit="return inputCheck()">
 <!-- 	   <div>
 	  	<label for="no">NO</label>
 	  	<input type="text" id="no" name="no">
@@ -32,7 +33,7 @@
 	  
 	  <div>
 	  	<label for="filename">file</label>
-	  	<input type="file" id="filename" name="filename">
+	  	<input type="file" size="30" name="filename">
 	  </div>
 	  
 	  <div>

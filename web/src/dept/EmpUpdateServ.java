@@ -1,6 +1,7 @@
 package dept;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,22 +24,23 @@ public class EmpUpdateServ extends HttpServlet {
 
     //수정페이지 이동
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//사번으로 단건조회
-		EmpDAO dao = new EmpDAO();
-		EmpVO empVO = new EmpVO();
 		
-		//joblist
-		
-		//부서리스트
-		
-		//사원리스트
-		
-		
-		//request에 저장
-		request.setAttribute("");
-		
+
+		// 부서리스트
+		DeptDAO dao = new DeptDAO();
+		ArrayList<DeptVO> deptlist = dao.selectAll(null);
+		request.setAttribute("deptlist", deptlist);
+		// 사원리스트
+		List<EmpVO> emplist = EmpDAO.getInstance().selectAll();
+		request.setAttribute("emplist", emplist);
+		// 사번으로 단건조회
+		EmpVO emp = new EmpVO();
+		emp.setEmployee_id(request.getParameter("employee_id"));
+		emp = EmpDAO.getInstance().selectOne(emp);
+		request.setAttribute("emp", emp);
+
+		// 수정페이지 이동
 		request.getRequestDispatcher("empUpdate.jsp").forward(request, response);
-		//수정페이지 이동
 	}
 
 	//수정처리

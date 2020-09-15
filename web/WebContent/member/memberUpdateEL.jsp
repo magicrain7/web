@@ -88,12 +88,7 @@ function inputCheck(){
 	</div>
 	
 	<div>
-	<%
-		String hobby = member.getHobby();
-		if( hobby == null){
-			hobby = "";
-		}
-	%>
+
 		<label for="hobby">취미</label>
 		<input type="checkbox" name="hobby" value="read">독서
 		<input type="checkbox" name="hobby" value="game">게임
